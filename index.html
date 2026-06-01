@@ -320,18 +320,20 @@
 
                 <article class="glass-card attractiveness-card" data-mobile-view="chart">
                     <div class="card-title-badge">
-                        <h3><i class="fa-solid fa-star" style="color: #FFD43B;"></i> AI 기업 가치 매력도</h3>
-                        <span class="ai-pill" style="background: linear-gradient(135deg, #FFD43B, var(--accent-purple)); color: #000;">Attractiveness</span>
+                        <h3><i class="fa-solid fa-microchip" style="color: var(--accent-cyan);"></i> AI가 보는 기업 가치 매력도</h3>
+                        <span class="ai-pill" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: #fff;">AI Evaluation</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
-                        <div style="position: relative; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; background: conic-gradient(var(--accent-cyan) 0%, var(--accent-cyan) 85%, rgba(255,255,255,0.1) 85%); border-radius: 50%;">
-                            <div style="position: absolute; width: 66px; height: 66px; background: var(--bg-card); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                                <span id="val-score" style="font-family: var(--font-outfit); font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">85</span>
+                        <div class="ai-score-container">
+                            <div class="ai-core-bg"></div>
+                            <div class="ai-core-ring"></div>
+                            <div class="ai-core-value">
+                                <span id="val-score" style="font-family: var(--font-outfit); font-size: 1.6rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px var(--accent-cyan);">85</span>
                             </div>
                         </div>
                         <div style="flex-grow: 1;">
-                            <h4 id="score-title" style="margin: 0 0 0.5rem 0; font-size: 1rem; color: var(--accent-cyan);">우수한 투자가치</h4>
-                            <p id="score-desc" style="margin: 0; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">현재 재무 건전성과 주가 수준을 종합할 때 장기 투자 매력도가 상당히 높습니다.</p>
+                            <h4 id="score-title" style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--accent-cyan);">우수한 투자가치</h4>
+                            <p id="score-desc" style="margin: 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">현재 재무 건전성과 주가 수준을 종합할 때 장기 투자 매력도가 상당히 높습니다.</p>
                         </div>
                     </div>
                 </article>

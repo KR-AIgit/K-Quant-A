@@ -2336,6 +2336,56 @@ textarea.form-input {
     }
 }
 /* ==========================================================================
+   FUTURISTIC AI SCORE (ATTRACTIVENESS) UI
+   ========================================================================== */
+.ai-score-container {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ai-core-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, rgba(0, 240, 255, 0) 70%);
+    border-radius: 50%;
+    animation: pulseCore 2s infinite alternate;
+}
+.ai-core-ring {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed var(--accent-cyan);
+    border-radius: 50%;
+    animation: rotateRing 10s linear infinite;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) inset;
+}
+.ai-core-value {
+    position: relative;
+    z-index: 2;
+    background: rgba(15, 20, 30, 0.8);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+@keyframes pulseCore {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+@keyframes rotateRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
    BOSS MODE (EXCEL SKIN) OVERRIDES
    ========================================================================== */
 body.excel-mode {
@@ -2397,6 +2447,29 @@ body.excel-mode #stock-search-input {
     font-weight: bold !important;
 }
 body.excel-mode #stock-search-input::placeholder { color: #888 !important; }
+
+/* Excel Mode Overrides for AI Score UI */
+body.excel-mode .ai-score-container {
+    background: transparent !important;
+}
+body.excel-mode .ai-core-bg {
+    display: none !important;
+}
+body.excel-mode .ai-core-ring {
+    border: 2px solid #217346 !important; /* Solid green circle for Excel */
+    animation: none !important;
+    box-shadow: none !important;
+}
+body.excel-mode .ai-core-value {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+body.excel-mode .ai-core-value #val-score {
+    color: #217346 !important;
+    text-shadow: none !important;
+    font-size: 1.8rem !important;
+}
 
 body.excel-mode .container {
     padding: 0 !important;
