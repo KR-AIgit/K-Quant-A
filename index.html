@@ -46,55 +46,10 @@
             
             <section class="left-column">
                 
-                <article class="glass-card selector-card" data-mobile-view="dashboard">
-                    <label for="stock-select"><i class="fa-solid fa-chart-line" style="color: var(--accent-purple);"></i> 분석 종목 선택</label>
-                    <div class="custom-select-wrapper" id="custom-dropdown-container">
-                        <div class="custom-select-trigger" id="custom-dropdown-trigger">
-                            <span id="custom-dropdown-text">1. 삼성전자 (005930)</span>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="custom-select-options" id="custom-dropdown-options">
-                            <!-- JS populated -->
-                        </div>
-                        <select id="stock-select" class="custom-select" style="display:none;">
-                            <optgroup label="국내 시가총액 Top 10 개별종목 (08:00 KST 기준 업데이트)">
-                                <option value="005930" selected>1. 삼성전자 (005930)</option>
-                                <option value="000660">2. SK하이닉스 (000660)</option>
-                                <option value="373220">3. LG에너지솔루션 (373220)</option>
-                                <option value="207940">4. 삼성바이오로직스 (207940)</option>
-                                <option value="005380">5. 현대차 (005380)</option>
-                                <option value="000270">6. 기아 (000270)</option>
-                                <option value="068270">7. 셀트리온 (068270)</option>
-                                <option value="105560">8. KB금융 (105560)</option>
-                                <option value="005490">9. POSCO홀딩스 (005490)</option>
-                                <option value="035420">10. NAVER (035420)</option>
-                            </optgroup>
-                            <optgroup label="국내 거래대금/시가총액 Top 10 ETF">
-                                <option value="069500">1. KODEX 200 (069500)</option>
-                                <option value="357870">2. TIGER CD금리투자KIS (357870)</option>
-                                <option value="122630">3. KODEX 레버리지 (122630)</option>
-                                <option value="114800">4. KODEX 인버스 (114800)</option>
-                                <option value="360750">5. TIGER 미국S&P500 (360750)</option>
-                                <option value="381180">6. TIGER 미국테크TOP10 (381180)</option>
-                                <option value="252670">7. KODEX 200선물인버스2X (252670)</option>
-                                <option value="430220">8. KODEX KOFR금리액티브 (430220)</option>
-                                <option value="305080">9. TIGER 2차전지소재fn (305080)</option>
-                                <option value="251340">10. KODEX 코스닥150선물인버스 (251340)</option>
-                            </optgroup>
-                            <optgroup label="검색된 종목" id="searched-optgroup" style="display:none;">
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <div class="search-container">
-                        <div class="search-input-group">
-                            <input type="text" id="stock-search-input" placeholder="종목명 또는 6자리 코드 입력 (예: 005930)" />
-                            <button id="stock-search-btn"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
-                        </div>
-                        <div class="search-banner">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span><b>[검색 안내]</b> 6자리 종목코드나 주요 종목명을 입력해주세요. 야후 파이낸스 실시간 API로 차트를 연동합니다. 1~10위 리스트는 매일 08:00 KST에 갱신됩니다.</span>
-                        </div>
+                                <article class="glass-card selector-card" data-mobile-view="dashboard">
+                    <div class="search-trigger-btn" id="open-search-modal">
+                        <i class="fa-solid fa-magnifying-glass" style="color: var(--accent-purple);"></i>
+                        <span id="current-selected-stock-display">종목 검색 및 분석 종목 선택...</span>
                     </div>
                 </article>
 
@@ -451,5 +406,54 @@
     </div>
 
     <script src="app.js"></script>
+
+    <!-- Search Modal -->
+    <div class="search-modal-overlay" id="search-modal">
+        <div class="search-modal-container glass-card">
+            <button class="close-modal-btn" id="close-search-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-search-header">
+                <div class="modal-search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="modal-stock-search-input" placeholder="종목명 또는 6자리 코드 입력 (예: 오뚜기, 005930)" />
+                    <button id="modal-stock-search-btn">검색</button>
+                </div>
+            </div>
+            
+            <div class="modal-stock-lists">
+                <!-- KOSPI Column -->
+                <div class="stock-list-column">
+                    <h4 class="list-column-title"><i class="fa-solid fa-building"></i> 국내 시가총액 Top 10 종목</h4>
+                    <div class="stock-grid" id="kospi-grid">
+                        <button class="modal-stock-btn" data-code="005930">1. 삼성전자</button>
+                        <button class="modal-stock-btn" data-code="000660">2. SK하이닉스</button>
+                        <button class="modal-stock-btn" data-code="373220">3. LG에너지솔루션</button>
+                        <button class="modal-stock-btn" data-code="207940">4. 삼성바이오로직스</button>
+                        <button class="modal-stock-btn" data-code="005380">5. 현대차</button>
+                        <button class="modal-stock-btn" data-code="000270">6. 기아</button>
+                        <button class="modal-stock-btn" data-code="068270">7. 셀트리온</button>
+                        <button class="modal-stock-btn" data-code="105560">8. KB금융</button>
+                        <button class="modal-stock-btn" data-code="005490">9. POSCO홀딩스</button>
+                        <button class="modal-stock-btn" data-code="035420">10. NAVER</button>
+                    </div>
+                </div>
+                <!-- KOSDAQ/ETF Column -->
+                <div class="stock-list-column">
+                    <h4 class="list-column-title"><i class="fa-solid fa-layer-group"></i> 거래량/시가총액 Top 10 ETF</h4>
+                    <div class="stock-grid" id="kosdaq-grid">
+                        <button class="modal-stock-btn" data-code="069500">1. KODEX 200</button>
+                        <button class="modal-stock-btn" data-code="357870">2. TIGER CD금리투자</button>
+                        <button class="modal-stock-btn" data-code="122630">3. KODEX 레버리지</button>
+                        <button class="modal-stock-btn" data-code="114800">4. KODEX 인버스</button>
+                        <button class="modal-stock-btn" data-code="360750">5. TIGER 미국S&P500</button>
+                        <button class="modal-stock-btn" data-code="381180">6. TIGER 미국테크TOP10</button>
+                        <button class="modal-stock-btn" data-code="252670">7. KODEX 200선물인버스2X</button>
+                        <button class="modal-stock-btn" data-code="430220">8. KODEX KOFR금리액티브</button>
+                        <button class="modal-stock-btn" data-code="305080">9. TIGER 2차전지테마</button>
+                        <button class="modal-stock-btn" data-code="251340">10. KODEX 코스닥150선물인버스</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
