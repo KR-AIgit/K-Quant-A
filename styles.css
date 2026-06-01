@@ -2349,10 +2349,12 @@ body.excel-mode {
     --bg-card: #ffffff !important; /* Fixes the attractiveness gauge inner circle */
     --accent-cyan: #217346 !important; /* Make cyan look like Excel Green */
 }
-body.excel-mode * {
+/* IMPORTANT: Do not target <i> tags to preserve FontAwesome icons */
+body.excel-mode *:not(i) {
     font-family: "Malgun Gothic", "맑은 고딕", Arial, sans-serif !important;
     letter-spacing: normal !important;
 }
+
 body.excel-mode .glass-card, 
 body.excel-mode .news-item, 
 body.excel-mode .comment-item, 
@@ -2367,14 +2369,35 @@ body.excel-mode .indicator,
 body.excel-mode .flow-card,
 body.excel-mode .trade-rationale-card,
 body.excel-mode .stat-row,
-body.excel-mode .timeline-item {
+body.excel-mode .timeline-item,
+body.excel-mode .exchange-price-box,
+body.excel-mode #stock-search-input,
+body.excel-mode #stock-search-btn {
     background: #ffffff !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
     border: 1px solid #c2c2c2 !important;
     border-radius: 0 !important;
+    color: #111111 !important;
 }
+
+/* Ensure inner text is very readable */
+body.excel-mode label,
+body.excel-mode h3,
+body.excel-mode .insight-box span,
+body.excel-mode .insight-box p,
+body.excel-mode .target-row span,
+body.excel-mode .recommend-link-desc,
+body.excel-mode .ex-name,
+body.excel-mode .ex-price,
+body.excel-mode #custom-dropdown-text,
+body.excel-mode #stock-search-input {
+    color: #111111 !important;
+    font-weight: bold !important;
+}
+body.excel-mode #stock-search-input::placeholder { color: #888 !important; }
+
 body.excel-mode .container {
     padding: 0 !important;
 }
@@ -2389,13 +2412,19 @@ body.excel-mode h1 {
     font-weight: 700 !important;
 }
 body.excel-mode .status-dot { display: none !important; }
-body.excel-mode #network-status-text { color: #222 !important; font-weight: normal !important; }
+body.excel-mode #network-status-text,
+body.excel-mode #network-status-subtext { 
+    color: #333333 !important; 
+    font-weight: normal !important; 
+}
 body.excel-mode .logo-section span { display: none !important; }
-/* body.excel-mode i { color: #666 !important; } - Removed to keep original icon colors */
+
+/* Let icons keep their original style, just remove any glow/neon effects */
+body.excel-mode i { text-shadow: none !important; }
 
 body.excel-mode .ai-pill {
     background: #e1dfdd !important;
-    color: #222 !important;
+    color: #222222 !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     border: 1px solid #bbb !important;
@@ -2407,14 +2436,14 @@ body.excel-mode #val-revenue,
 body.excel-mode #val-op-profit,
 body.excel-mode #val-net-income,
 body.excel-mode .insight-value {
-    color: #000 !important;
+    color: #000000 !important;
     text-shadow: none !important;
     font-weight: bold !important;
 }
 body.excel-mode .card-title-badge { border-bottom: 1px solid #c2c2c2 !important; }
 body.excel-mode .dashboard-footer { border-top: 1px solid #c2c2c2 !important; background: #f3f2f1 !important; }
 body.excel-mode .ai-signal-badge {
-    background: #fff !important;
+    background: #ffffff !important;
     border: 1px solid #217346 !important;
     color: #217346 !important;
     box-shadow: none !important;
@@ -2423,7 +2452,7 @@ body.excel-mode .ai-signal-badge {
 }
 body.excel-mode canvas {
     /* Keep a bit of color but tone down the neon */
-    filter: saturate(0.5) contrast(120%) brightness(0.9) !important;
+    filter: saturate(0.8) contrast(120%) brightness(0.9) !important;
 }
 body.excel-mode .mobile-nav {
     background: #f3f2f1 !important;
@@ -2431,18 +2460,18 @@ body.excel-mode .mobile-nav {
     border-radius: 0 !important;
     box-shadow: none !important;
 }
-body.excel-mode .nav-item { color: #555 !important; }
+body.excel-mode .nav-item { color: #555555 !important; }
 body.excel-mode .nav-item.active { color: #217346 !important; }
 body.excel-mode .nav-item.active i { color: #217346 !important; }
 body.excel-mode .boss-mode-btn i { color: #217346 !important; }
-body.excel-mode .timeline-dot { background: #c2c2c2 !important; box-shadow: none !important; border-color: #777 !important; }
+body.excel-mode .timeline-dot { background: #c2c2c2 !important; box-shadow: none !important; border-color: #777777 !important; }
 body.excel-mode .timeline-line { background: #c2c2c2 !important; }
 body.excel-mode .sentiment-bar-fill { box-shadow: none !important; border-radius: 0 !important; }
 body.excel-mode .bullish-fill { background: #217346 !important; }
 body.excel-mode .bearish-fill { background: #c2c2c2 !important; }
-body.excel-mode .custom-optgroup { background: #f3f2f1 !important; border-bottom: 1px solid #c2c2c2 !important; color: #111 !important; font-weight: bold !important; }
-body.excel-mode .custom-option { border-bottom: 1px solid #eee !important; color: #111 !important; }
+body.excel-mode .custom-optgroup { background: #f3f2f1 !important; border-bottom: 1px solid #c2c2c2 !important; color: #111111 !important; font-weight: bold !important; }
+body.excel-mode .custom-option { border-bottom: 1px solid #eeeeee !important; color: #111111 !important; }
 body.excel-mode .custom-option:hover { background: #e1dfdd !important; }
 body.excel-mode .custom-option.selected { background: #c6efce !important; color: #006100 !important; font-weight: bold !important; }
-body.excel-mode .form-input { background: #fff !important; border: 1px solid #c2c2c2 !important; color: #111 !important; border-radius: 0 !important; }
-body.excel-mode .submit-btn { background: #f3f2f1 !important; border: 1px solid #c2c2c2 !important; color: #111 !important; border-radius: 0 !important; box-shadow: none !important; font-weight: bold !important; }
+body.excel-mode .form-input { background: #ffffff !important; border: 1px solid #c2c2c2 !important; color: #111111 !important; border-radius: 0 !important; }
+body.excel-mode .submit-btn { background: #f3f2f1 !important; border: 1px solid #c2c2c2 !important; color: #111111 !important; border-radius: 0 !important; box-shadow: none !important; font-weight: bold !important; }
