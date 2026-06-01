@@ -208,6 +208,9 @@ function initCustomDropdown() {
 
     if (!select || !wrapper) return;
 
+    // Move optionsContainer to body to escape overflow:hidden and backdrop-filter containing blocks
+    document.body.appendChild(optionsContainer);
+
     function buildOptions() {
         optionsContainer.innerHTML = "";
         Array.from(select.children).forEach(group => {
@@ -231,11 +234,9 @@ function initCustomDropdown() {
                         optionsContainer.classList.remove("open");
                         trigger.classList.remove("active");
                         
-                        // Update selected class
                         optionsContainer.querySelectorAll(".custom-option").forEach(el => el.classList.remove("selected"));
                         optEl.classList.add("selected");
                         
-                        // Trigger native select change
                         select.dispatchEvent(new Event("change"));
                     });
                     
@@ -254,10 +255,24 @@ function initCustomDropdown() {
         
         if (!isOpen) {
             buildOptions();
+            
+            // Calculate position for desktop (absolute), let CSS handle mobile (fixed)
+            if (window.innerWidth > 768) {
+                const rect = trigger.getBoundingClientRect();
+                optionsContainer.style.top = (rect.bottom + window.scrollY + 5) + "px";
+                optionsContainer.style.left = (rect.left + window.scrollX) + "px";
+                optionsContainer.style.width = rect.width + "px";
+                optionsContainer.style.position = "absolute";
+            } else {
+                optionsContainer.style.top = "";
+                optionsContainer.style.left = "";
+                optionsContainer.style.width = "";
+                optionsContainer.style.position = ""; 
+            }
+            
             optionsContainer.classList.add("open");
             trigger.classList.add("active");
             
-            // Scroll selected item into view
             setTimeout(() => {
                 const selectedEl = optionsContainer.querySelector(".custom-option.selected");
                 if (selectedEl) {
@@ -272,7 +287,13 @@ function initCustomDropdown() {
         trigger.classList.remove("active");
     });
     
-    // Initial load
+    window.addEventListener("resize", () => {
+        if (optionsContainer.classList.contains("open")) {
+            optionsContainer.classList.remove("open");
+            trigger.classList.remove("active");
+        }
+    });
+    
     const selectedOpt = select.options[select.selectedIndex];
     if (selectedOpt) {
         textEl.textContent = selectedOpt.textContent;

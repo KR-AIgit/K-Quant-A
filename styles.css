@@ -1548,15 +1548,17 @@ textarea.form-input {
 
     /* Prevent awkward word breaking in card titles */
     .card-title-badge {
-        flex-wrap: nowrap !important;
-        gap: 0.4rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.6rem !important;
+        justify-content: space-between !important;
     }
 
     .card-title-badge h3 {
-        font-size: 1rem !important; /* Scale down to fit 1 line */
+        font-size: 1.05rem !important;
         word-break: keep-all !important;
-        white-space: nowrap !important;
-        letter-spacing: -0.03em !important;
+        white-space: normal !important; /* Allow wrapping onto a second line gracefully */
+        line-height: 1.35 !important;
+        letter-spacing: -0.02em !important;
     }
 
     .ai-pill {
