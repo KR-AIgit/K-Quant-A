@@ -458,7 +458,7 @@ function setupEventListeners() {
             if (e.key === "Enter") searchBtn.click();
         });
     }
-    commentForm.addEventListener("submit", handleCommentSubmit);
+    if (commentForm) { commentForm.addEventListener("submit", handleCommentSubmit); }
 
     const mobileNavItems = document.querySelectorAll(".nav-item");
     const mobileViews = document.querySelectorAll("[data-mobile-view]");
