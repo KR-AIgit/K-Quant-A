@@ -158,7 +158,7 @@ function getStockInfo(code) {
     if (STOCK_DATABASE[code]) return STOCK_DATABASE[code];
     
     const newStock = {
-        name: Object.keys(STOCK_NAME_MAP).find(k => STOCK_NAME_MAP[k] === code) || "검색된 종목",
+        name: Object.keys(STOCK_NAME_MAP).find(k => STOCK_NAME_MAP[k] === code) || (typeof ALL_KRX_STOCKS !== 'undefined' ? Object.keys(ALL_KRX_STOCKS).find(k => ALL_KRX_STOCKS[k] === code) : null) || "검색된 종목",
         desc: "야후 파이낸스 실시간 API를 통해 동적으로 로드된 종목입니다. 종목에 대한 시세와 트렌드, 외인/기관 수급 추정 데이터가 실시간으로 분석 중입니다.",
         techDesc: "<b>실시간 종목 펀더멘탈 요약:</b><br>• 현재 틱 데이터와 가격 모멘텀을 AI 신경망이 분석 중입니다.",
         timeline: [
@@ -399,15 +399,35 @@ function setupEventListeners() {
                     return;
                 }
 
-                // 2. 국내 상장회사 검색 연동
-                let foundCode = null;
-                for (let name in STOCK_NAME_MAP) {
-                    if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
-                        foundCode = STOCK_NAME_MAP[name];
-                        break;
-                    }
-                }
-                if (foundCode) {
+                // 2. 국내 상장회사 검색 연동 (자체 2,500여개 KRX DB 활용)
+                  let foundCode = null;
+                  // 먼저 기존 즐겨찾기 DB 검사
+                  for (let name in STOCK_NAME_MAP) {
+                      if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
+                          foundCode = STOCK_NAME_MAP[name];
+                          break;
+                      }
+                  }
+                  
+                  // 전체 KRX 상장사 DB에서 검색
+                  if (!foundCode && typeof ALL_KRX_STOCKS !== 'undefined') {
+                      for (let name in ALL_KRX_STOCKS) {
+                          if (name.toUpperCase().replace(/\s+/g, '') === upperInput) {
+                              foundCode = ALL_KRX_STOCKS[name];
+                              break;
+                          }
+                      }
+                      if (!foundCode) {
+                          for (let name in ALL_KRX_STOCKS) {
+                              if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
+                                  foundCode = ALL_KRX_STOCKS[name];
+                                  break;
+                              }
+                          }
+                      }
+                  }
+                  
+                  if (foundCode) {
                     code = foundCode;
                 } else {
                     // Generate a deterministic fake 6-digit code based on the Korean name
@@ -570,45 +590,57 @@ function loadStockData(stockCode) {
     const stockName = encodeURIComponent(db.name);
     const isOriginal = !!STOCK_DATABASE[stockCode];
       
-      // Remove any previous onclick handlers
-      if (lnkResearch) lnkResearch.onclick = null;
+      // Since we now have real 6-digit codes for ALL Korean stocks via stockCodes.js,
+      // we can just use the standard Naver Finance URLs natively without any hacks!
+      
       if (lnkNews) lnkNews.onclick = null;
+      if (lnkResearch) lnkResearch.onclick = null;
 
-      if (isOriginal) {
-          if (lnkNews) lnkNews.href = `https://finance.naver.com/item/news.naver?code=${stockCode}`;
-          if (lnkResearch) lnkResearch.href = `https://finance.naver.com/item/main.naver?code=${stockCode}`; // Link to comprehensive info (Image 4)
-          if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockCode}`;
-      } else {
-          if (lnkNews) lnkNews.href = `https://search.naver.com/search.naver?where=news&query=${stockName}+주식`;
-          
-          if (lnkResearch) {
-              lnkResearch.href = "#";
-              lnkResearch.onclick = (e) => {
+      if (lnkNews) lnkNews.href = `https://finance.naver.com/item/news.naver?code=${stockCode}`;
+      if (lnkResearch) lnkResearch.href = `https://finance.naver.com/item/main.naver?code=${stockCode}`;
+      if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockCode}`; else {
+                    if (lnkNews) {
+              lnkNews.href = "#";
+              lnkNews.onclick = (e) => {
                   e.preventDefault();
-                  // Create a hidden form to submit the query in EUC-KR encoding to Naver Finance Search
                   const form = document.createElement('form');
                   form.action = 'https://finance.naver.com/search/searchList.naver';
                   form.method = 'get';
                   form.target = '_blank';
                   form.acceptCharset = 'euc-kr';
-                  
                   const input = document.createElement('input');
                   input.type = 'hidden';
                   input.name = 'query';
-                  input.value = db.name; // e.g., "펄어비스"
-                  
+                  input.value = db.name;
                   form.appendChild(input);
                   document.body.appendChild(form);
                   form.submit();
-                  document.body.removeChild(form);
+                  setTimeout(() => document.body.removeChild(form), 2000);
+              };
+          }
+          
+          if (lnkResearch) {
+              lnkResearch.href = "#";
+              lnkResearch.onclick = (e) => {
+                  e.preventDefault();
+                  const form = document.createElement('form');
+                  form.action = 'https://finance.naver.com/search/searchList.naver';
+                  form.method = 'get';
+                  form.target = '_blank';
+                  form.acceptCharset = 'euc-kr';
+                  const input = document.createElement('input');
+                  input.type = 'hidden';
+                  input.name = 'query';
+                  input.value = db.name;
+                  form.appendChild(input);
+                  document.body.appendChild(form);
+                  form.submit();
+                  setTimeout(() => document.body.removeChild(form), 2000);
               };
           }
           
           if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockName}`;
-      }+주식`;
-        if (lnkResearch) lnkResearch.href = `https://m.stock.naver.com/search/custom?keyword=${stockName}`;
-        if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockName}`;
-    }
+      }
 
     try {
         renderInsightBoard(stockCode);
@@ -1275,13 +1307,33 @@ function initSearchModal() {
             }
 
             let foundCode = null;
-            for (let name in STOCK_NAME_MAP) {
-                if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
-                    foundCode = STOCK_NAME_MAP[name];
-                    break;
-                }
-            }
-            if (foundCode) {
+              // 먼저 기존 즐겨찾기 DB 검사
+              for (let name in STOCK_NAME_MAP) {
+                  if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
+                      foundCode = STOCK_NAME_MAP[name];
+                      break;
+                  }
+              }
+              
+              // 전체 KRX 상장사 DB에서 검색
+              if (!foundCode && typeof ALL_KRX_STOCKS !== 'undefined') {
+                  for (let name in ALL_KRX_STOCKS) {
+                      if (name.toUpperCase().replace(/\s+/g, '') === upperInput) {
+                          foundCode = ALL_KRX_STOCKS[name];
+                          break;
+                      }
+                  }
+                  if (!foundCode) {
+                      for (let name in ALL_KRX_STOCKS) {
+                          if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
+                              foundCode = ALL_KRX_STOCKS[name];
+                              break;
+                          }
+                      }
+                  }
+              }
+              
+              if (foundCode) {
                 code = foundCode;
             } else {
                 let hash = 0;
