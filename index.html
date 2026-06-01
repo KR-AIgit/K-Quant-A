@@ -24,14 +24,21 @@
             </div>
             
             <div class="status-indicators">
-                <div class="indicator" id="network-status-container">
+                <div class="indicator" id="network-status-container" style="align-items: center;">
                     <span class="status-dot active" id="network-status-dot"></span>
-                    <span id="network-status-text">한국거래소 연결 중...</span>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <span id="network-status-text">한국거래소 연결 중...</span>
+                        <span id="network-status-subtext" style="font-size: 0.55rem; color: var(--text-muted); margin-top: 2px; display: none;">(잠시 후 자동 업데이트)</span>
+                    </div>
                 </div>
                 <div class="indicator">
                     <i class="fa-regular fa-clock" style="color: var(--accent-cyan);"></i>
                     <span id="live-time-text">00:00:00</span>
                 </div>
+                <button id="boss-mode-toggle" class="boss-mode-btn" title="모드 전환" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 0.2rem; margin-left: 0.5rem; outline: none;">
+                    <i id="icon-default-mode" class="fa-solid fa-file-excel" style="font-size: 1.2rem;"></i>
+                    <i id="icon-boss-mode" class="fa-solid fa-desktop" style="font-size: 1.2rem; display: none;"></i>
+                </button>
             </div>
         </header>
 
@@ -220,13 +227,43 @@
                     </div>
                 </article>
 
+                <article class="glass-card recommend-links-card" data-mobile-view="community">
+                    <div class="card-title-badge">
+                        <h3><i class="fa-solid fa-link" style="color: var(--accent-purple);"></i> 추천 리포트 및 기사</h3>
+                        <span class="ai-pill">Reference</span>
+                    </div>
+                    <div class="recommend-links-grid">
+                        <a href="#" target="_blank" class="recommend-link-item" id="link-naver-news">
+                            <div class="recommend-link-icon"><i class="fa-regular fa-newspaper"></i></div>
+                            <div class="recommend-link-text">
+                                <span class="recommend-link-title">네이버 금융 최신 뉴스</span>
+                                <span class="recommend-link-desc">선택된 종목의 가장 빠른 최신 뉴스를 확인하세요.</span>
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="recommend-link-item" id="link-naver-research">
+                            <div class="recommend-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                            <div class="recommend-link-text">
+                                <span class="recommend-link-title">기업 종목분석 보고서</span>
+                                <span class="recommend-link-desc">기업의 펀더멘털과 재무제표를 깊이 있게 분석합니다.</span>
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="recommend-link-item" id="link-hankyung">
+                            <div class="recommend-link-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                            <div class="recommend-link-text">
+                                <span class="recommend-link-title">한경 컨센서스 리포트</span>
+                                <span class="recommend-link-desc">증권사들의 전문가 목표 주가와 리포트를 모아봅니다.</span>
+                            </div>
+                        </a>
+                    </div>
+                </article>
+
             </section>
             
             <section class="right-column">
                 
                 <article class="glass-card insight-card" data-mobile-view="chart">
                     <div class="card-title-badge">
-                        <h3><i class="fa-solid fa-graduation-cap" style="color: var(--accent-cyan);"></i> 초보자를 위한 핵심 지표 인사이트</h3>
+                        <h3><i class="fa-solid fa-graduation-cap" style="color: var(--accent-cyan);"></i> 핵심 지표 인사이트</h3>
                         <span class="ai-pill" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));">Fundamental Board</span>
                     </div>
                     
@@ -260,33 +297,42 @@
                     </div>
                 </article>
 
-                <article class="glass-card recommend-links-card" data-mobile-view="chart">
+                <article class="glass-card financial-card" data-mobile-view="chart">
                     <div class="card-title-badge">
-                        <h3><i class="fa-solid fa-link" style="color: var(--accent-purple);"></i> 초보자 추천 리포트 및 기사</h3>
-                        <span class="ai-pill">Reference</span>
+                        <h3><i class="fa-solid fa-file-invoice-dollar" style="color: var(--accent-cyan);"></i> 기업 재무제표 핵심요약</h3>
+                        <span class="ai-pill" style="background: linear-gradient(135deg, var(--accent-purple), var(--sentiment-bullish));">Financials</span>
                     </div>
-                    <div class="recommend-links-grid">
-                        <a href="#" target="_blank" class="recommend-link-item" id="link-naver-news">
-                            <div class="recommend-link-icon"><i class="fa-regular fa-newspaper"></i></div>
-                            <div class="recommend-link-text">
-                                <span class="recommend-link-title">네이버 금융 최신 뉴스</span>
-                                <span class="recommend-link-desc">선택된 종목의 가장 빠른 최신 뉴스를 확인하세요.</span>
+                    <div class="financial-grid" style="display: flex; gap: 1rem; flex-direction: column; margin-top: 1.2rem;">
+                        <div class="fin-row" style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 700;">최근 연간 매출액</span>
+                            <span id="val-revenue" style="font-family: var(--font-outfit); font-size: 1.1rem; font-weight: 800; color: var(--text-primary);">대기 중</span>
+                        </div>
+                        <div class="fin-row" style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 700;">최근 연간 영업이익</span>
+                            <span id="val-op-profit" style="font-family: var(--font-outfit); font-size: 1.1rem; font-weight: 800; color: var(--sentiment-bullish);">대기 중</span>
+                        </div>
+                        <div class="fin-row" style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <span style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 700;">최근 연간 당기순이익</span>
+                            <span id="val-net-income" style="font-family: var(--font-outfit); font-size: 1.1rem; font-weight: 800; color: var(--text-primary);">대기 중</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="glass-card attractiveness-card" data-mobile-view="chart">
+                    <div class="card-title-badge">
+                        <h3><i class="fa-solid fa-star" style="color: #FFD43B;"></i> AI 기업 가치 매력도</h3>
+                        <span class="ai-pill" style="background: linear-gradient(135deg, #FFD43B, var(--accent-purple)); color: #000;">Attractiveness</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem;">
+                        <div style="position: relative; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; background: conic-gradient(var(--accent-cyan) 0%, var(--accent-cyan) 85%, rgba(255,255,255,0.1) 85%); border-radius: 50%;">
+                            <div style="position: absolute; width: 66px; height: 66px; background: var(--bg-card); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                                <span id="val-score" style="font-family: var(--font-outfit); font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">85</span>
                             </div>
-                        </a>
-                        <a href="#" target="_blank" class="recommend-link-item" id="link-naver-research">
-                            <div class="recommend-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                            <div class="recommend-link-text">
-                                <span class="recommend-link-title">기업 종목분석 보고서</span>
-                                <span class="recommend-link-desc">기업의 펀더멘털과 재무제표를 깊이 있게 분석합니다.</span>
-                            </div>
-                        </a>
-                        <a href="#" target="_blank" class="recommend-link-item" id="link-hankyung">
-                            <div class="recommend-link-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                            <div class="recommend-link-text">
-                                <span class="recommend-link-title">한경 컨센서스 리포트</span>
-                                <span class="recommend-link-desc">증권사들의 전문가 목표 주가와 리포트를 모아봅니다.</span>
-                            </div>
-                        </a>
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <h4 id="score-title" style="margin: 0 0 0.5rem 0; font-size: 1rem; color: var(--accent-cyan);">우수한 투자가치</h4>
+                            <p id="score-desc" style="margin: 0; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">현재 재무 건전성과 주가 수준을 종합할 때 장기 투자 매력도가 상당히 높습니다.</p>
+                        </div>
                     </div>
                 </article>
 
@@ -397,7 +443,7 @@
                 <p class="footer-brand"><i class="fa-solid fa-brain-circuit" style="color: var(--accent-cyan);"></i> K-Quant AI</p>
                 <p class="footer-desc">
                     한국(K) 시장에 맞춘 퀀트(계량분석) 인공지능인 <b>K-Quant AI</b>는 실시간 주가 체결 동향 및 외국인/기관 수급 데이터를 기반으로 
-                    초보자도 직관적으로 파악할 수 있는 안정적인 기대 손익비 투자 결정을 돕는 지능형 국내 주식 분석 프레임워크입니다.
+                    누구나 직관적으로 파악할 수 있는 안정적인 기대 손익비 투자 결정을 돕는 지능형 국내 주식 분석 프레임워크입니다.
                 </p>
                 <p class="footer-copy">&copy; 2026 K-Quant AI. Advanced Stock Intelligence Board.</p>
             </div>

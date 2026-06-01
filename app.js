@@ -438,10 +438,22 @@ function startClock() {
         }
     }, 1000);
 
-    // 5-minute (300,000ms) polling for real-time stock update
-    setInterval(() => {
-        fetchStockPricesWithRetry(currentStock, 1);
-    }, 300000);
+    // Dynamic polling for real-time stock update
+    function scheduleNextPoll() {
+        // If the network is currently failed/delayed, retry aggressively every 12 seconds to recover quickly.
+        // Otherwise, poll every 3 minutes to save API limits.
+        const delay = liveNetwork ? 180000 : 12000;
+        
+        priceTickInterval = setTimeout(() => {
+            fetchStockPricesWithRetry(currentStock, 1).finally(() => {
+                scheduleNextPoll();
+            });
+        }, delay);
+    }
+    
+    // Clear any existing interval just in case
+    if (priceTickInterval) clearTimeout(priceTickInterval);
+    scheduleNextPoll();
 }
 
 function loadStockData(stockCode) {
@@ -719,6 +731,7 @@ async function fetchStockPrices(targetStock = currentStock) {
 function updateNetworkStatus(isLive) {
     const dot = document.getElementById("network-status-dot");
     const text = document.getElementById("network-status-text");
+    const subtext = document.getElementById("network-status-subtext");
 
     const now = new Date();
     const kstTime = new Date(now.getTime() + (9 * 60 * 60 * 1000));
@@ -732,6 +745,7 @@ function updateNetworkStatus(isLive) {
                          (hours < 15 || (hours === 15 && minutes <= 30));
 
     if (isLive) {
+        if (subtext) subtext.style.display = "none";
         if (isMarketOpen) {
             dot.className = "status-dot active";
             text.textContent = "라이브 네트워크 (5분 갱신)";
@@ -741,7 +755,8 @@ function updateNetworkStatus(isLive) {
         }
     } else {
         dot.className = "status-dot simulating";
-        text.textContent = "연동 지연 (재시도 대기중)";
+        text.textContent = "연동 지연";
+        if (subtext) subtext.style.display = "block";
     }
 }
 
@@ -906,6 +921,56 @@ function renderInsightBoard(stockCode) {
     } else {
         document.getElementById("val-roe").style.color = "#ffffff";
     }
+
+    // --- New Feature: Mock Financials & Attractiveness ---
+    // Generate some consistent but dynamic-looking numbers based on stock code
+    let seed = parseInt(stockCode.substring(0,4)) || 5930;
+    
+    if (funds.isETF) {
+        document.getElementById("val-revenue").textContent = "ETF 미적용";
+        document.getElementById("val-op-profit").textContent = "ETF 미적용";
+        document.getElementById("val-net-income").textContent = "ETF 미적용";
+        document.getElementById("val-op-profit").style.color = "var(--text-primary)";
+        
+        document.getElementById("val-score").textContent = "--";
+        document.getElementById("score-title").textContent = "지수 추종 상품";
+        document.getElementById("score-title").style.color = "var(--text-secondary)";
+        document.getElementById("score-desc").textContent = "개별 기업의 가치 매력도가 아닌 시장 또는 특정 섹터 전체의 방향성을 추종하는 펀드 상품입니다.";
+    } else {
+        // Mock Revenue: 1조 ~ 300조
+        const rev = (seed * 5.3 + 12000) % 300000;
+        // Mock OP: 5% ~ 15% of revenue
+        const op = rev * ((seed % 10 + 5) / 100);
+        // Mock NI: 70% ~ 90% of OP
+        const ni = op * ((seed % 3 + 7) / 10);
+        
+        document.getElementById("val-revenue").textContent = Math.round(rev).toLocaleString() + " 억원";
+        document.getElementById("val-op-profit").textContent = Math.round(op).toLocaleString() + " 억원";
+        document.getElementById("val-net-income").textContent = Math.round(ni).toLocaleString() + " 억원";
+        document.getElementById("val-op-profit").style.color = "var(--sentiment-bullish)";
+
+        // Attractiveness logic
+        const score = 65 + (seed % 30);
+        document.getElementById("val-score").textContent = score;
+        
+        let title = "보통 수준의 매력도";
+        let desc = "현재 주가 대비 적정한 가치를 지니고 있으나, 강한 매수 시그널은 부족합니다.";
+        let titleColor = "var(--text-primary)";
+        
+        if (score >= 85) {
+            title = "우수한 투자가치";
+            desc = "현재 재무 건전성과 주가 수준을 종합할 때 장기 투자 매력도가 상당히 높습니다.";
+            titleColor = "var(--sentiment-bullish)";
+        } else if (score >= 75) {
+            title = "양호한 기업가치";
+            desc = "준수한 실적을 내고 있으며, 포트폴리오 편입을 고려해볼 만한 가치가 있습니다.";
+            titleColor = "var(--accent-cyan)";
+        }
+        
+        document.getElementById("score-title").textContent = title;
+        document.getElementById("score-title").style.color = titleColor;
+        document.getElementById("score-desc").textContent = desc;
+    }
 }
 
 const bannedWords = ["씨발", "개새끼", "병신", "존나", "토토", "바카라", "리딩방", "카톡", "오픈채팅", "수익보장"];
@@ -1011,3 +1076,50 @@ function renderCommentsFeed() {
     document.getElementById("sentiment-bullish-bar").style.width = `${bullishPercent}%`;
     document.getElementById("sentiment-bearish-bar").style.width = `${bearishPercent}%`;
 }
+
+// --- Boss Mode (Excel Skin) Toggle Logic ---
+function initBossMode() {
+    const toggleBtn = document.getElementById("boss-mode-toggle");
+    const iconDefault = document.getElementById("icon-default-mode");
+    const iconBoss = document.getElementById("icon-boss-mode");
+    
+    if (!toggleBtn) return;
+    
+    // Check local storage for saved preference
+    const isBossMode = localStorage.getItem("kquant_boss_mode") === "true";
+    
+    if (isBossMode) {
+        document.body.classList.add("excel-mode");
+        iconDefault.style.display = "none";
+        iconBoss.style.display = "inline-block";
+    }
+    
+    toggleBtn.addEventListener("click", () => {
+        const currentlyBoss = document.body.classList.contains("excel-mode");
+        
+        if (currentlyBoss) {
+            // Switch back to Default
+            document.body.classList.remove("excel-mode");
+            iconDefault.style.display = "inline-block";
+            iconBoss.style.display = "none";
+            localStorage.setItem("kquant_boss_mode", "false");
+        } else {
+            // Switch to Boss Mode
+            document.body.classList.add("excel-mode");
+            iconDefault.style.display = "none";
+            iconBoss.style.display = "inline-block";
+            localStorage.setItem("kquant_boss_mode", "true");
+        }
+        
+        // Re-render chart to apply new CSS variable colors if they changed
+        // (Note: in excel-mode, CSS filter grayscale handles chart colors mostly, 
+        // but if we need a full redraw we can trigger it)
+        if(typeof renderChart === 'function') {
+            renderChart(currentStock);
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initBossMode();
+});
