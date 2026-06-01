@@ -565,9 +565,18 @@ function loadStockData(stockCode) {
     const lnkResearch = document.getElementById("link-naver-research");
     const lnkHankyung = document.getElementById("link-hankyung");
     
-    if (lnkNews) lnkNews.href = `https://finance.naver.com/item/news.naver?code=${stockCode}`;
-    if (lnkResearch) lnkResearch.href = `https://finance.naver.com/item/coinfo.naver?code=${stockCode}`;
-    if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockCode}`;
+    const stockName = encodeURIComponent(db.name);
+    const isOriginal = !!STOCK_DATABASE[stockCode];
+    
+    if (isOriginal) {
+        if (lnkNews) lnkNews.href = `https://finance.naver.com/item/news.naver?code=${stockCode}`;
+        if (lnkResearch) lnkResearch.href = `https://finance.naver.com/item/coinfo.naver?code=${stockCode}`;
+        if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockCode}`;
+    } else {
+        if (lnkNews) lnkNews.href = `https://search.naver.com/search.naver?where=news&query=${stockName}+주식`;
+        if (lnkResearch) lnkResearch.href = `https://m.stock.naver.com/search/custom?keyword=${stockName}`;
+        if (lnkHankyung) lnkHankyung.href = `https://consensus.hankyung.com/analysis/list?sdate=&edate=&search_text=${stockName}`;
+    }
 
     try {
         renderInsightBoard(stockCode);
