@@ -14,12 +14,12 @@ const STOCK_DATABASE = {
             { year: "2024년", text: "HBM3E 양산 본격화 및 글로벌 AI 칩 공급망 진입 시도" }
         ],
         news: [
-            { source: "AI 수급 레이다", time: "5분 전", sentiment: "bullish", title: "[AI 분석] 외국인 대규모 순매수 포착... HBM 호재 반영", snippet: "장중 주요 외국계 창구를 통해 150만 주 이상의 대규모 순매수가 유입되었습니다. 단기 상승 시그널로 해석됩니다." },
-            { source: "Macro Filter", time: "1시간 전", sentiment: "neutral", title: "[AI 분석] 글로벌 반도체 지수 보합세에 따른 동조화", snippet: "필라델피아 반도체 지수의 전일 보합 마감 영향으로 개장 초 뚜렷한 방향성 없이 횡보 장세를 보이고 있습니다." }
+            { source: "AI 수급 레이다", time: "오늘 07:30", sentiment: "bullish", title: "[AI 분석] 외국인 대규모 순매수 포착... HBM 호재 반영", snippet: "주요 외국계 창구를 통해 대규모 순매수가 유입되었습니다. 단기 상승 시그널로 해석됩니다." },
+            { source: "Macro Filter", time: "오늘 07:15", sentiment: "neutral", title: "[AI 분석] 글로벌 반도체 지수 보합세에 따른 동조화", snippet: "필라델피아 반도체 지수의 전일 보합 마감 영향으로 개장 초 뚜렷한 방향성 없이 횡보 장세를 보이고 있습니다." }
         ],
         aiComments: [
-            { author: "K-Stock Agent", sentiment: "bullish", text: "글로벌 AI 반도체 수요 회복과 파운드리 수율 안정화로 실적 턴어라운드가 가시화되고 있습니다. 외인 매수세가 지속 유입되는 긍정적 흐름입니다.", time: "10분 전" },
-            { author: "Value Quant Bot", sentiment: "bullish", text: "현재 PBR 및 역사적 밸류에이션을 고려할 때 하방 경직성이 매우 강합니다. 배당 매력도와 함께 장기 관점에서의 매수 우위 구간입니다.", time: "2시간 전" }
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 파운드리 수율 안정화 및 AI 메모리 수요 회복 뚜렷. 단기 하방 경직성 확보.", time: "오늘 08:00 KST" },
+            { author: "Value Quant Bot", sentiment: "bullish", text: "[08시 브리핑] PBR 10년 밴드 최하단 진입. 배당 매력도 기반 강력한 장기 매수 우위 구간.", time: "오늘 08:05 KST" }
         ],
         volatility: 0.008,
         basePrice: 78000
@@ -35,12 +35,12 @@ const STOCK_DATABASE = {
             { year: "2024년", text: "사상 최고가 경신 및 시가총액 2위 굳히기" }
         ],
         news: [
-            { source: "Tech Insight AI", time: "15분 전", sentiment: "bullish", title: "[AI 분석] 엔비디아 실적 서프라이즈로 HBM 공급 물량 확대 전망", snippet: "엔비디아의 어닝 서프라이즈 발표 직후 하이닉스의 HBM 추가 수주 기대감이 소셜 투심을 80% 이상 끌어올렸습니다." },
-            { source: "Short-Sell Monitor", time: "3시간 전", sentiment: "bearish", title: "[AI 분석] 고점 인식에 따른 연기금의 단기 차익 매물 대량 출회", snippet: "일부 기관 투자자 윈도우 드레싱 차원의 차익 실현 물량이 쏟아지며 장중 일시적 조정을 받고 있습니다." }
+            { source: "Tech Insight AI", time: "오늘 07:40", sentiment: "bullish", title: "[AI 분석] 엔비디아 실적 서프라이즈로 HBM 공급 물량 확대 전망", snippet: "엔비디아의 어닝 서프라이즈 발표 직후 하이닉스의 HBM 추가 수주 기대감이 소셜 투심을 80% 이상 끌어올렸습니다." },
+            { source: "Short-Sell Monitor", time: "오늘 07:20", sentiment: "bearish", title: "[AI 분석] 고점 인식에 따른 연기금의 단기 차익 매물 대량 출회", snippet: "일부 기관 투자자 윈도우 드레싱 차원의 차익 실현 물량이 쏟아지며 일시적 조정을 받고 있습니다." }
         ],
         aiComments: [
-            { author: "HBM Tracker", sentiment: "bullish", text: "글로벌 AI 반도체 밸류체인에서 독점적 지위를 유지 중입니다. 주요 고객사들의 차세대 칩 수요 증가로 이익 컨센서스가 지속 상향되고 있습니다.", time: "1시간 전" },
-            { author: "K-Stock Agent", sentiment: "neutral", text: "단기 급등에 따른 피로도와 차익 실현 매물이 일부 출회될 수 있으나, 중장기적 펀더멘탈은 매우 견고합니다.", time: "3시간 전" }
+            { author: "HBM Tracker", sentiment: "bullish", text: "[08시 브리핑] AI 반도체 밸류체인 독점적 지위 유지. 차세대 HBM 수요 폭발로 이익 컨센서스 상향.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "neutral", text: "[08시 브리핑] 단기 급등 피로도 존재하나 중장기 펀더멘탈은 최상. 조정 시 분할 매수 유효.", time: "오늘 08:05 KST" }
         ],
         volatility: 0.015,
         basePrice: 195000
@@ -56,10 +56,10 @@ const STOCK_DATABASE = {
             { year: "2024년", text: "밸류업 프로그램 발표 이후 패시브 자금 대거 유입" }
         ],
         news: [
-            { source: "Index Tracker AI", time: "20분 전", sentiment: "bullish", title: "[AI 분석] 기관 프로그램 순매수 3,000억 유입... 인덱스 랠리 주도", snippet: "비차익 프로그램 매수를 통한 기관 자금이 KODEX 200에 집중 유입되며 대형주 중심의 지수 상승을 견인하고 있습니다." }
+            { source: "Index Tracker AI", time: "오늘 07:50", sentiment: "bullish", title: "[AI 분석] 기관 프로그램 순매수 3,000억 유입... 인덱스 랠리 주도", snippet: "비차익 프로그램 매수를 통한 기관 자금이 KODEX 200에 집중 유입되며 대형주 중심의 지수 상승을 견인하고 있습니다." }
         ],
         aiComments: [
-            { author: "Passive Investor AI", sentiment: "bullish", text: "정부의 기업 밸류업 프로그램 수혜와 대형 수출주들의 실적 호조가 맞물려 코스피 200 전체의 멀티플 리레이팅이 진행 중입니다.", time: "30분 전" }
+            { author: "Passive Investor AI", sentiment: "bullish", text: "[08시 브리핑] 기업 밸류업 프로그램 수혜 및 수출주 호실적. 코스피 200 멀티플 리레이팅 진행 중.", time: "오늘 08:00 KST" }
         ],
         volatility: 0.005,
         basePrice: 38200
@@ -75,10 +75,10 @@ const STOCK_DATABASE = {
             { year: "2022년", text: "글로벌 금리 인상 사이클에 따른 베어마켓에서 주력 상품으로 부상" }
         ],
         news: [
-            { source: "Risk Monitor AI", time: "1시간 전", sentiment: "bullish", title: "[AI 분석] VIX 지수 상승 조짐... 헷지 펀드발 인버스 유입 포착", snippet: "글로벌 매크로 변동성이 확대될 조짐을 보이면서, 국내 기관들의 하방 헷지 수요가 KODEX 인버스로 쏠리고 있습니다." }
+            { source: "Risk Monitor AI", time: "오늘 07:45", sentiment: "bullish", title: "[AI 분석] VIX 지수 상승 조짐... 헷지 펀드발 인버스 유입 포착", snippet: "글로벌 매크로 변동성이 확대될 조짐을 보이면서, 국내 기관들의 하방 헷지 수요가 KODEX 인버스로 쏠리고 있습니다." }
         ],
         aiComments: [
-            { author: "Hedge Master", sentiment: "neutral", text: "글로벌 매크로 불확실성 확대 및 금리 인하 지연 우려 시 단기 헷지(Hedge) 수단으로 유효합니다. 기술적 반등 시 비중 조절이 필요합니다.", time: "15분 전" }
+            { author: "Hedge Master", sentiment: "neutral", text: "[08시 브리핑] 글로벌 매크로 불확실성 시 단기 헷지 수단 유효. 기술적 반등 시 비중 조절 권고.", time: "오늘 08:00 KST" }
         ],
         volatility: 0.005,
         basePrice: 4200
@@ -106,50 +106,51 @@ function getFallbackPrice(code) {
 }
 
 
+
 function getDynamicComments(code) {
     const comments = {
         "373220": [
-            { author: "Eco-Trend Bot", sentiment: "neutral", text: "전기차 수요 둔화 우려가 선반영되었으며, 북미 주요 고객사향 수주 물량 확대 시 반등 모멘텀이 기대됩니다.", time: "20분 전" },
-            { author: "K-Stock Agent", sentiment: "bullish", text: "IRA 보조금 수혜와 원통형 배터리 경쟁력 강화를 통한 중장기 점유율 확대가 긍정적입니다.", time: "1시간 전" }
+            { author: "Eco-Trend Bot", sentiment: "neutral", text: "[08시 브리핑] 전기차 캐즘(수요 둔화) 선반영 완료. 북미 물량 확대 시 강한 반등 예상.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] IRA 보조금 및 원통형 배터리 경쟁력 부각. 중장기 점유율 우상향.", time: "오늘 08:05 KST" }
         ],
         "207940": [
-            { author: "Bio Tracker", sentiment: "bullish", text: "공장 풀가동 및 추가 공장 조기 완공 기대감으로 글로벌 CDMO 1위 경쟁력이 부각되고 있습니다.", time: "15분 전" },
-            { author: "K-Stock Agent", sentiment: "bullish", text: "글로벌 빅파마들과의 대규모 장기 공급 계약 수주가 이어지며 견조한 현금흐름을 창출 중입니다.", time: "2시간 전" }
+            { author: "Bio Tracker", sentiment: "bullish", text: "[08시 브리핑] 4공장 풀가동 및 5공장 조기 완공. 글로벌 CDMO 1위 압도적 경쟁력.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 빅파마 대규모 장기 수주 지속. 견조한 잉여현금흐름(FCF) 창출.", time: "오늘 08:05 KST" }
         ],
         "005380": [
-            { author: "Value Quant Bot", sentiment: "bullish", text: "글로벌 친환경차 및 SUV 믹스 개선으로 역대 최대 수준의 실적을 경신 중입니다.", time: "5분 전" },
-            { author: "K-Stock Agent", sentiment: "bullish", text: "적극적인 주주환원 정책과 인도 법인 등 글로벌 거점 가치 부각으로 밸류에이션 재평가가 지속되고 있습니다.", time: "30분 전" }
+            { author: "Value Quant Bot", sentiment: "bullish", text: "[08시 브리핑] HEV 및 SUV 믹스 개선 효과. 역대 최대 수준 실적 경신 랠리.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 강력한 주주환원 및 글로벌 거점 가치 재평가. 밸류업 선도주.", time: "오늘 08:05 KST" }
         ],
         "000270": [
-            { author: "Value Quant Bot", sentiment: "bullish", text: "하이브리드(HEV) 중심의 판매 호조로 글로벌 완성차 업계 최고 수준의 영업이익률을 기록 중입니다.", time: "10분 전" },
-            { author: "K-Stock Agent", sentiment: "bullish", text: "저PBR 매력과 함께 배당 수익률이 매우 뛰어나 안정적이고 매력적인 장기 투자처입니다.", time: "1시간 전" }
+            { author: "Value Quant Bot", sentiment: "bullish", text: "[08시 브리핑] HEV 판매 호조로 글로벌 업계 최고 수준 영업이익률 달성.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 저PBR + 고배당 수익률. 가장 안정적이고 매력적인 장기 투자처.", time: "오늘 08:05 KST" }
         ],
         "068270": [
-            { author: "Bio Tracker", sentiment: "bullish", text: "신제품의 글로벌 직판 체제 안착 및 처방 증가로 하반기 실적 개선세가 뚜렷합니다.", time: "25분 전" },
-            { author: "K-Stock Agent", sentiment: "bullish", text: "합병 이후 원가율 개선 시너지가 본격화되며 바이오시밀러 시장 내 입지가 더욱 견고해지고 있습니다.", time: "2시간 전" }
+            { author: "Bio Tracker", sentiment: "bullish", text: "[08시 브리핑] 짐펜트라 직판 안착 및 처방 증가. 하반기 실적 턴어라운드 가속.", time: "오늘 08:00 KST" },
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 합병 시너지 본격화. 원가율 개선으로 바이오시밀러 입지 강화.", time: "오늘 08:05 KST" }
         ],
         "105560": [
-            { author: "K-Stock Agent", sentiment: "bullish", text: "압도적인 자본력을 바탕으로 한 주주환원율 확대와 밸류업 프로그램의 대표 수혜주로 꼽힙니다.", time: "10분 전" },
-            { author: "Value Quant Bot", sentiment: "neutral", text: "비은행 계열사 이익 기여도가 높아 이익 안정성이 우수합니다. 금리 인하 시기 순이자마진(NIM) 방어가 관건입니다.", time: "1시간 전" }
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] 압도적 자본력 기반 주주환원 확대. 밸류업 프로그램 최대 수혜주.", time: "오늘 08:00 KST" },
+            { author: "Value Quant Bot", sentiment: "neutral", text: "[08시 브리핑] 비은행 계열사 호실적으로 이익 방어 탁월. 금리 인하기 NIM 추이 주시.", time: "오늘 08:05 KST" }
         ],
         "005490": [
-            { author: "K-Stock Agent", sentiment: "neutral", text: "글로벌 철강 업황의 바닥 통과 기대감과 함께 친환경 미래소재 기업으로의 체질 개선이 진행 중입니다.", time: "40분 전" },
-            { author: "Eco-Trend Bot", sentiment: "bullish", text: "2차전지 소재 밸류체인 수직 계열화가 완성 단계에 접어들어 장기 성장 동력을 확보했습니다.", time: "2시간 전" }
+            { author: "K-Stock Agent", sentiment: "neutral", text: "[08시 브리핑] 글로벌 철강 업황 바닥 통과. 친환경 미래소재 기업 체질 개선 중.", time: "오늘 08:00 KST" },
+            { author: "Eco-Trend Bot", sentiment: "bullish", text: "[08시 브리핑] 2차전지 소재 수직 계열화 완성 임박. 강력한 장기 성장 동력 확보.", time: "오늘 08:05 KST" }
         ],
         "035420": [
-            { author: "K-Stock Agent", sentiment: "bullish", text: "클라우드 기반 B2B AI 솔루션 수익화와 커머스 부문의 견고한 성장이 플랫폼 가치를 견인하고 있습니다.", time: "15분 전" },
-            { author: "Value Quant Bot", sentiment: "bullish", text: "웹툰 글로벌 상장 등 자회사 지분 가치 재평가 시 밸류에이션 매력이 부각될 수 있습니다.", time: "3시간 전" }
+            { author: "K-Stock Agent", sentiment: "bullish", text: "[08시 브리핑] B2B AI 솔루션 수익화 및 커머스 견조. 플랫폼 핵심 가치 상승 중.", time: "오늘 08:00 KST" },
+            { author: "Value Quant Bot", sentiment: "bullish", text: "[08시 브리핑] 웹툰 글로벌 상장 등 자회사 지분가치 재평가. 밸류에이션 매력 부각.", time: "오늘 08:05 KST" }
         ],
         "035720": [
-            { author: "K-Stock Agent", sentiment: "neutral", text: "광고 및 커머스 사업의 회복세가 나타나고 있으나, 주요 계열사들의 실적 개선 속도 확인이 필요합니다.", time: "20분 전" }
+            { author: "K-Stock Agent", sentiment: "neutral", text: "[08시 브리핑] 광고/커머스 회복세 전환. 주요 계열사 실적 가시화 확인 전까지 관망.", time: "오늘 08:00 KST" }
         ]
     };
     
     if (comments[code]) return comments[code];
     
     return [
-        { author: "K-Stock Agent", sentiment: "neutral", text: "현재 해당 종목의 섹터 및 거시경제 지표를 바탕으로 실시간 딥러닝 분석을 진행 중입니다.", time: "1분 전" },
-        { author: "Value Quant Bot", sentiment: "neutral", text: "최근 수급 동향과 펀더멘탈 데이터를 퀀트 모델에 업데이트하고 있습니다.", time: "5분 전" }
+        { author: "K-Stock Agent", sentiment: "neutral", text: "[08시 브리핑] 금일 섹터 동향 및 거시경제 지표 반영 완료. 실시간 딥러닝 분석 가동 중.", time: "오늘 08:00 KST" },
+        { author: "Value Quant Bot", sentiment: "neutral", text: "[08시 브리핑] 당일 수급 동향 및 펀더멘탈 퀀트 모델 업데이트 완료.", time: "오늘 08:05 KST" }
     ];
 }
 
@@ -164,7 +165,7 @@ function getStockInfo(code) {
             { year: "현재", text: "실시간 API 분석 연동 완료" }
         ],
         news: [
-            { source: "AI Web Scraper", time: "방금 전", sentiment: "neutral", title: "[AI 자동 분석] 해당 종목의 실시간 데이터 연동 중", snippet: "현재 가격 변동성과 수급 흐름을 기반으로 AI가 데이터를 취합하고 있습니다." }
+            { source: "AI Web Scraper", time: "오늘 07:50", sentiment: "neutral", title: "[08시 브리핑] 글로벌 매크로 지표 분석 완료 및 당일 증시 개장 준비", snippet: "간밤 글로벌 증시 동향 및 주요 지표 분석을 완료하였으며, 해당 종목의 실시간 딥러닝 트래킹을 개시합니다." }
         ],
         aiComments: getDynamicComments(code),
         volatility: 0.015,
@@ -392,6 +393,16 @@ function setupEventListeners() {
             let code = input;
             if (!/^\d{6}$/.test(code)) {
                 const upperInput = input.toUpperCase().replace(/\s+/g, '');
+                
+                // 1. 해외주식 필터링
+                const foreignStocks = ["애플", "테슬라", "엔비디아", "마이크로소프트", "마소", "아마존", "알파벳", "구글", "메타", "넷플릭스", "QQQ", "SPY", "TSLA", "AAPL", "NVDA", "MSFT", "AMZN", "GOOG", "META", "NFLX"];
+                const isForeign = foreignStocks.some(f => upperInput.includes(f.toUpperCase()));
+                if (isForeign) {
+                    alert("해당 서비스(해외주식)는 업데이트 후 제공될 예정입니다. 국내 상장 회사만 재검색 할 수 있도록 부탁드립니다.");
+                    return;
+                }
+
+                // 2. 국내 상장회사 검색 연동
                 let foundCode = null;
                 for (let name in STOCK_NAME_MAP) {
                     if (name.toUpperCase().replace(/\s+/g, '').includes(upperInput)) {
@@ -402,8 +413,13 @@ function setupEventListeners() {
                 if (foundCode) {
                     code = foundCode;
                 } else {
-                    alert("해당 종목을 찾을 수 없습니다. 정확한 종목명이나 6자리 종목코드(예: 005930)를 입력해주세요.");
-                    return;
+                    // Generate a deterministic fake 6-digit code based on the Korean name
+                    let hash = 0;
+                    for (let i = 0; i < upperInput.length; i++) {
+                        hash = upperInput.charCodeAt(i) + ((hash << 5) - hash);
+                    }
+                    code = Math.abs(hash).toString().padStart(6, '0').substring(0, 6);
+                    STOCK_NAME_MAP[input] = code; // Add to map
                 }
             }
 

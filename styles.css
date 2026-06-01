@@ -2448,6 +2448,23 @@ body.excel-mode #stock-search-input {
 }
 body.excel-mode #stock-search-input::placeholder { color: #888 !important; }
 
+body.excel-mode .comment-author,
+body.excel-mode .comment-text,
+body.excel-mode .comment-time,
+body.excel-mode .breakdown-item {
+    color: #111111 !important;
+}
+
+body.excel-mode #ai-tech-desc,
+body.excel-mode .news-title,
+body.excel-mode .news-snippet,
+body.excel-mode .timeline-content h4,
+body.excel-mode .timeline-content p,
+body.excel-mode .news-source-time {
+    color: #111111 !important;
+}
+
+
 /* Excel Mode Overrides for AI Score UI */
 body.excel-mode .ai-score-container {
     background: transparent !important;
