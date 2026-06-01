@@ -194,8 +194,90 @@ document.addEventListener("DOMContentLoaded", () => {
         currentStock = stockSelect.value;
     }
     
+    initCustomDropdown();
+    
     loadStockData(currentStock);
 });
+
+function initCustomDropdown() {
+    const select = document.getElementById("stock-select");
+    const wrapper = document.getElementById("custom-dropdown-container");
+    const trigger = document.getElementById("custom-dropdown-trigger");
+    const textEl = document.getElementById("custom-dropdown-text");
+    const optionsContainer = document.getElementById("custom-dropdown-options");
+
+    if (!select || !wrapper) return;
+
+    function buildOptions() {
+        optionsContainer.innerHTML = "";
+        Array.from(select.children).forEach(group => {
+            if (group.tagName === "OPTGROUP") {
+                if (group.style.display === "none") return;
+                const grpEl = document.createElement("div");
+                grpEl.className = "custom-optgroup";
+                grpEl.textContent = group.label;
+                optionsContainer.appendChild(grpEl);
+
+                Array.from(group.children).forEach(opt => {
+                    const optEl = document.createElement("div");
+                    optEl.className = "custom-option";
+                    if (opt.value === select.value) optEl.classList.add("selected");
+                    optEl.textContent = opt.textContent;
+                    optEl.dataset.value = opt.value;
+                    
+                    optEl.addEventListener("click", () => {
+                        select.value = opt.value;
+                        textEl.textContent = opt.textContent;
+                        optionsContainer.classList.remove("open");
+                        trigger.classList.remove("active");
+                        
+                        // Update selected class
+                        optionsContainer.querySelectorAll(".custom-option").forEach(el => el.classList.remove("selected"));
+                        optEl.classList.add("selected");
+                        
+                        // Trigger native select change
+                        select.dispatchEvent(new Event("change"));
+                    });
+                    
+                    optionsContainer.appendChild(optEl);
+                });
+            }
+        });
+    }
+
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = optionsContainer.classList.contains("open");
+        
+        document.querySelectorAll(".custom-select-options").forEach(el => el.classList.remove("open"));
+        document.querySelectorAll(".custom-select-trigger").forEach(el => el.classList.remove("active"));
+        
+        if (!isOpen) {
+            buildOptions();
+            optionsContainer.classList.add("open");
+            trigger.classList.add("active");
+            
+            // Scroll selected item into view
+            setTimeout(() => {
+                const selectedEl = optionsContainer.querySelector(".custom-option.selected");
+                if (selectedEl) {
+                    selectedEl.scrollIntoView({ block: "nearest" });
+                }
+            }, 10);
+        }
+    });
+
+    document.addEventListener("click", () => {
+        optionsContainer.classList.remove("open");
+        trigger.classList.remove("active");
+    });
+    
+    // Initial load
+    const selectedOpt = select.options[select.selectedIndex];
+    if (selectedOpt) {
+        textEl.textContent = selectedOpt.textContent;
+    }
+}
 
 function setupEventListeners() {
     const stockSelect = document.getElementById("stock-select");
@@ -277,6 +359,14 @@ function setupEventListeners() {
             select.value = code;
             currentStock = code;
             searchInput.value = "";
+            
+            // Also update the custom dropdown text
+            const textEl = document.getElementById("custom-dropdown-text");
+            if (textEl) {
+                const selectedOpt = select.options[select.selectedIndex];
+                if (selectedOpt) textEl.textContent = selectedOpt.textContent;
+            }
+            
             loadStockData(code);
         });
         

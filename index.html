@@ -41,8 +41,15 @@
                 
                 <article class="glass-card selector-card" data-mobile-view="dashboard">
                     <label for="stock-select"><i class="fa-solid fa-chart-line" style="color: var(--accent-purple);"></i> 분석 종목 선택</label>
-                    <div class="custom-select-wrapper">
-                        <select id="stock-select" class="custom-select">
+                    <div class="custom-select-wrapper" id="custom-dropdown-container">
+                        <div class="custom-select-trigger" id="custom-dropdown-trigger">
+                            <span id="custom-dropdown-text">1. 삼성전자 (005930)</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="custom-select-options" id="custom-dropdown-options">
+                            <!-- JS populated -->
+                        </div>
+                        <select id="stock-select" class="custom-select" style="display:none;">
                             <optgroup label="국내 시가총액 Top 10 개별종목 (08:00 KST 기준 업데이트)">
                                 <option value="005930" selected>1. 삼성전자 (005930)</option>
                                 <option value="000660">2. SK하이닉스 (000660)</option>
